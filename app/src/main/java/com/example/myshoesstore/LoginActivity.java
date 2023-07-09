@@ -81,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                             pbLogin.setVisibility(View.GONE);
 
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }else{
                             pbLogin.setVisibility(View.GONE);
 
