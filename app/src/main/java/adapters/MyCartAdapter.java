@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -13,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myshoesstore.R;
 import com.example.myshoesstore.models.MyCartModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -20,10 +26,14 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     Context context;
     List<MyCartModel> cartModelList;
     int totalPrice = 0;
+    FirebaseFirestore firestore;
+    FirebaseAuth auth;
 
     public MyCartAdapter(Context context, List<MyCartModel> cartModelList) {
         this.context = context;
         this.cartModelList = cartModelList;
+        firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -41,6 +51,26 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         holder.txtQuantity.setText(cartModelList.get(position).getQuantity());
         holder.txtTotalPrice.setText(String.valueOf(cartModelList.get(position).getTotalPrice()));
 
+        holder.imgRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                        .collection("AddToCart")
+                        .document(cartModelList.get(position).getDocumentId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    cartModelList.remove(cartModelList.get(position));
+                                    notifyDataSetChanged();
+                                    Toast.makeText(context, "Đã xóa sản phẩm khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(context, "Error"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+
         totalPrice = totalPrice + cartModelList.get(position).getTotalPrice();
         Intent intent = new Intent("MyTotalAmount");
         intent.putExtra("totalAmount", totalPrice);
@@ -54,6 +84,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtProductName, txtProductPrice, txtDate, txtTime, txtTotalPrice, txtQuantity;
+        ImageView imgRemove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +94,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
             txtTime = itemView.findViewById(R.id.textViewCurrentTime);
             txtQuantity = itemView.findViewById(R.id.textViewCartQuantity);
             txtTotalPrice = itemView.findViewById(R.id.textViewCartPrice);
+            imgRemove = itemView.findViewById(R.id.imageViewRemoveItem);
         }
     }
 }

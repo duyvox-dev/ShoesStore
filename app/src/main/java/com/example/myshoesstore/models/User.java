@@ -5,6 +5,10 @@ public class User {
     String email;
     String password;
 
+    String profileImgUrl;
+    String phoneNumber;
+    String address;
+
     public User() {
     }
 
@@ -12,6 +16,30 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getProfileImgUrl() {
+        return profileImgUrl;
+    }
+
+    public void setProfileImgUrl(String profileImgUrl) {
+        this.profileImgUrl = profileImgUrl;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {

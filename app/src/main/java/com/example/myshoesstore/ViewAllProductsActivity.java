@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.myshoesstore.models.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +28,7 @@ public class ViewAllProductsActivity extends AppCompatActivity {
     ViewAllProductsAdapter viewAllProductsAdapter;
     List<ProductModel> productModelList;
     Toolbar tb;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,12 @@ public class ViewAllProductsActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         String type = getIntent().getStringExtra("type");
         rv = findViewById(R.id.recyclerViewAllProducts);
+        rv.setVisibility(View.GONE);
         tb = findViewById(R.id.toolBar);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        pb = findViewById(R.id.progressBar);
+        pb.setVisibility(View.VISIBLE);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,6 +59,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -65,6 +73,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -77,6 +87,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -89,6 +101,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -101,6 +115,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -113,6 +129,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -125,6 +143,8 @@ public class ViewAllProductsActivity extends AppCompatActivity {
                         ProductModel productModel = documentSnapshot.toObject(ProductModel.class);
                         productModelList.add(productModel);
                         viewAllProductsAdapter.notifyDataSetChanged();
+                        pb.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
                     }
                 }
             });
