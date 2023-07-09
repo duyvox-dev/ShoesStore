@@ -8,8 +8,11 @@
     tools:context=".MyCartFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
 
         <ImageView
             android:id="@+id/imageView2"
@@ -36,6 +39,48 @@
             android:textSize="22sp"
             tools:layout_editor_absoluteX="-51dp"
             tools:layout_editor_absoluteY="405dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/alice"
+            android:padding="10dp"
+            android:text="Tổng cộng: 0 VNĐ"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonPay"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Thanh Toán"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
