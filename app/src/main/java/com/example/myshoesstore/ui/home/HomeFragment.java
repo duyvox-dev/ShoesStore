@@ -17,6 +17,7 @@ import com.example.myshoesstore.R;
 
 import com.example.myshoesstore.models.CategoryModel;
 import com.example.myshoesstore.models.PopularModel;
+import com.example.myshoesstore.models.ProductModel;
 import com.example.myshoesstore.models.RecommendedModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.HomeCategoryAdapter;
-import adapters.PopularAdapter;
+//import adapters.PopularAdapter;
+import adapters.ProductAdapter;
 import adapters.RecommendedAdapter;
 
 public class HomeFragment extends Fragment {
@@ -38,7 +40,9 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore db;
 
     List<PopularModel> popularModelList;
-    PopularAdapter popularAdapter;
+    List<ProductModel> productModelList;
+//    PopularAdapter popularAdapter;
+    ProductAdapter productAdapter;
 
 
     List<CategoryModel> homeCategoryList;
@@ -63,21 +67,26 @@ public class HomeFragment extends Fragment {
         pbHome.setVisibility(View.VISIBLE);
         svHome.setVisibility(View.GONE);
 
-        rvPopularProducts.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        popularModelList = new ArrayList<>();
-        popularAdapter = new PopularAdapter(getActivity(), popularModelList);
-        rvPopularProducts.setAdapter(popularAdapter);
+//        rvPopularProducts.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+//        popularModelList = new ArrayList<>();
+//        popularAdapter = new PopularAdapter(getActivity(), popularModelList);
+//        rvPopularProducts.setAdapter(popularAdapter);
 
-        db.collection("PopularProducts")
+        rvPopularProducts.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        productModelList = new ArrayList<>();
+        productAdapter = new ProductAdapter(getActivity(), productModelList);
+        rvPopularProducts.setAdapter(productAdapter);
+
+        db.collection("Products")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                PopularModel popularModel = document.toObject(PopularModel.class);
-                                popularModelList.add(popularModel);
-                                popularAdapter.notifyDataSetChanged();
+                                ProductModel productModel = document.toObject(ProductModel.class);
+                                productModelList.add(productModel);
+                                productAdapter.notifyDataSetChanged();
 
                                 pbHome.setVisibility(View.GONE);
                                 svHome.setVisibility(View.VISIBLE);

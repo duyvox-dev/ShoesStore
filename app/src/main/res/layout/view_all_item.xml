@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/textViewPopularProductRating"
+                        android:id="@+id/textViewRatingCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -69,13 +69,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/alice"
+                        android:id="@+id/textViewPriceCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="55000"/>
+                        android:fontFamily="@font/alice"
+                        android:text="55000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
                     <TextView
                         android:textStyle="bold"
                         android:textSize="20dp"
