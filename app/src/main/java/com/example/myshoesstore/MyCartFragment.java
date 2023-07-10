@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +44,7 @@ public class MyCartFragment extends Fragment {
     List<MyCartModel> cartModelList;
     ProgressBar pb;
     Button btnOrder;
+    ConstraintLayout emptyLayout, nonEmptyLayout;
     public MyCartFragment() {
         // Required empty public constructor
     }
@@ -55,9 +57,12 @@ public class MyCartFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_my_cart, container, false);
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        emptyLayout = root.findViewById(R.id.constraint1);
+        nonEmptyLayout = root.findViewById(R.id.constraint2);
+        nonEmptyLayout.setVisibility(View.GONE);
         rvCart = root.findViewById(R.id.recyclerViewCart);
         btnOrder = root.findViewById(R.id.buttonOrder);
-        rvCart.setVisibility(View.GONE);
+
         txtTotalAmount = root.findViewById(R.id.textViewTotalAmount);
         pb = root.findViewById(R.id.progressBar);
         pb.setVisibility(View.VISIBLE);
@@ -66,24 +71,42 @@ public class MyCartFragment extends Fragment {
         cartModelList = new ArrayList<>();
         cartAdapter = new MyCartAdapter(getActivity(), cartModelList);
         rvCart.setAdapter(cartAdapter);
+            db.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                    .collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                // Clear the cartModelList before adding new items
+                                cartModelList.clear();
 
-        db.collection("CurrentUser").document(auth.getCurrentUser().getUid())
-                .collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments() ){
-                                String documentId = documentSnapshot.getId();
-                                MyCartModel cartModel = documentSnapshot.toObject(MyCartModel.class);
-                                cartModel.setDocumentId(documentId);
-                                cartModelList.add(cartModel);
+                                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                                    String documentId = documentSnapshot.getId();
+                                    MyCartModel cartModel = documentSnapshot.toObject(MyCartModel.class);
+                                    cartModel.setDocumentId(documentId);
+                                    cartModelList.add(cartModel);
+
+                                }
+
+                                // Notify the adapter about the data change
                                 cartAdapter.notifyDataSetChanged();
-                                pb.setVisibility(View.GONE);
-                                rvCart.setVisibility(View.VISIBLE);
+
+                                if (cartModelList.isEmpty()) {
+                                    // Show empty layout if the cart is empty
+                                    pb.setVisibility(View.GONE);
+                                    nonEmptyLayout.setVisibility(View.GONE);
+                                    emptyLayout.setVisibility(View.VISIBLE);
+                                } else {
+                                    // Show non-empty layout if the cart has items
+                                    pb.setVisibility(View.GONE);
+                                    nonEmptyLayout.setVisibility(View.VISIBLE);
+                                    emptyLayout.setVisibility(View.GONE);
+                                }
+                            } else {
+                                // Handle error case here if necessary
                             }
                         }
-                    }
-                });
+                    });
+
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +122,7 @@ public class MyCartFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
 
             int totalBill = intent.getIntExtra("totalAmount",0);
-            txtTotalAmount.setText("Tổng cộng: "+totalBill+ " VNĐ");
+            txtTotalAmount.setText("Tổng cộng: "+totalBill+ " đ");
         }
     };
 }

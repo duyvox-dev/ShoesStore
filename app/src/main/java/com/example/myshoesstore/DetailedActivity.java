@@ -29,7 +29,7 @@ public class DetailedActivity extends AppCompatActivity {
     int quantity = 1;
     int price = 0;
     ImageView imgDetailed, imgIncreaseQuantity, imgDecreaseQuantity;
-    TextView txtDetailedPrice, txtDetailedRating, txtDetailedDescription, txtQuantity;
+    TextView txtDetailedPrice, txtDetailedName, txtDetailedRating, txtDetailedDescription, txtQuantity;
     Button btnAddToCart;
     Toolbar tbDetailed;
     ProductModel productModel = null;
@@ -44,6 +44,7 @@ public class DetailedActivity extends AppCompatActivity {
         imgDetailed = findViewById(R.id.imageViewDetailed);
         imgIncreaseQuantity = findViewById(R.id.imageViewAdd);
         imgDecreaseQuantity = findViewById(R.id.imageViewMinus);
+        txtDetailedName = findViewById(R.id.textViewDetailedName);
         txtDetailedPrice = findViewById(R.id.textViewDetailedPrice);
         txtDetailedRating = findViewById(R.id.textViewDetailedRating);
         txtDetailedDescription = findViewById(R.id.textViewDetailedDescription);
@@ -62,9 +63,10 @@ public class DetailedActivity extends AppCompatActivity {
         }
         if (productModel != null){
             Glide.with(getApplicationContext()).load(productModel.getImg_url()).into(imgDetailed);
+            txtDetailedName.setText(productModel.getName());
             txtDetailedRating.setText(productModel.getRating());
             txtDetailedDescription.setText(productModel.getDescription());
-            txtDetailedPrice.setText("Giá : " + productModel.getPrice() + " VNĐ");
+            txtDetailedPrice.setText(productModel.getPrice() + " đ");
             price = productModel.getPrice() * quantity;
 
         }

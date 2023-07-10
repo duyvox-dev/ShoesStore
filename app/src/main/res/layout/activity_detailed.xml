@@ -25,22 +25,41 @@
         app:layout_constraintTop_toBottomOf="@+id/toolBarDetailed" />
 
     <TextView
-        android:id="@+id/textViewDetailedPrice"
+        android:id="@+id/textViewDetailedName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="159dp"
         android:fontFamily="@font/alice"
-        android:text="Giá: 500000 VNĐ"
-        android:textSize="25sp"
+        android:text="Product Name"
+        android:textSize="28sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewDetailed" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textViewDetailedPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="29dp"
+        android:fontFamily="@font/alice"
+        android:text="500000 VNĐ"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetailedName" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="28dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewDetailed">
@@ -49,17 +68,17 @@
             android:id="@+id/textViewDetailedRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/alice"
             android:layout_marginTop="14dp"
             android:layout_marginRight="10dp"
-            android:textSize="20sp"
-            android:text="5.0" />
+            android:fontFamily="@font/alice"
+            android:text="5.0"
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="14dp"
             android:layout_height="14dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/baseline_star_rate_24" />
 
     </LinearLayout>
@@ -134,13 +153,14 @@
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"
         android:layout_marginLeft="10dp"
        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonAddToCart"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Add To Cart"
+        android:layout_width="213dp"
+        android:layout_height="52dp"
+        android:drawableLeft="@drawable/baseline_shopping_cart_24"
+        android:text="Thêm vào giỏ hàng"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/relativeLayout"
-        />
+        app:layout_constraintTop_toTopOf="@id/relativeLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

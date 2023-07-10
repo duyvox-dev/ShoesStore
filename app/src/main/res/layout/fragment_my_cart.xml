@@ -16,7 +16,6 @@
         android:id="@+id/constraint1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         >
 
         <ImageView
@@ -68,10 +67,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
+            android:layout_width="396dp"
+            android:layout_height="560dp"
             android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

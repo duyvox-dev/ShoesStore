@@ -41,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.txtPopularProductName.setText(productModelList.get(position).getName());
         holder.txtPopularProductDescription.setText(productModelList.get(position).getDescription());
         holder.txtPopularProductRating.setText(productModelList.get(position).getRating());
-        holder.txtPopularProductPrice.setText(productModelList.get(position).getPrice()+"");
+        holder.txtPopularProductPrice.setText(productModelList.get(position).getPrice()+" đ");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
