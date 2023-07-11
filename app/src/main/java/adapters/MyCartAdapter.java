@@ -85,9 +85,16 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
             totalPrice += cartModel.getTotalPrice();
         }
 
-        Intent intent = new Intent("MyTotalAmount");
-        intent.putExtra("totalAmount", totalPrice);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        if (cartModelList.isEmpty()) {
+            Intent intent = new Intent("MyTotalAmount");
+            intent.putExtra("totalAmount", 0);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        } else {
+            Intent intent = new Intent("MyTotalAmount");
+            intent.putExtra("totalAmount", totalPrice);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        }
+
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtProductName, txtProductPrice, txtDate, txtTime, txtTotalPrice, txtQuantity;

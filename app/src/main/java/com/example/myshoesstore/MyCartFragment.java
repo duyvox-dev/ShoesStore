@@ -120,9 +120,18 @@ public class MyCartFragment extends Fragment {
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            int totalBill = intent.getIntExtra("totalAmount", 0);
+            txtTotalAmount.setText("Tổng cộng: " + totalBill + " đ");
 
-            int totalBill = intent.getIntExtra("totalAmount",0);
-            txtTotalAmount.setText("Tổng cộng: "+totalBill+ " đ");
+            if (totalBill == 0) {
+                pb.setVisibility(View.GONE);
+                nonEmptyLayout.setVisibility(View.GONE);
+                emptyLayout.setVisibility(View.VISIBLE);
+            } else {
+                pb.setVisibility(View.GONE);
+                nonEmptyLayout.setVisibility(View.VISIBLE);
+                emptyLayout.setVisibility(View.GONE);
+            }
         }
     };
 }
