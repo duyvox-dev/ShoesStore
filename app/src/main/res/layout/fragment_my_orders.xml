@@ -12,9 +12,9 @@
         android:layout_centerInParent="true"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintOrder1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         >
 
         <ImageView
@@ -44,7 +44,7 @@
             tools:layout_editor_absoluteY="405dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint2"
+        android:id="@+id/constraintOrder2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

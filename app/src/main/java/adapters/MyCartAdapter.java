@@ -62,6 +62,12 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
                                 if (task.isSuccessful()){
                                     cartModelList.remove(cartModelList.get(position));
                                     notifyDataSetChanged();
+                                    // Check if the cart is empty after removing the item
+                                    if (cartModelList.isEmpty()) {
+                                        totalPrice = 0; // Set totalPrice to 0 when the cart is empty
+                                    }
+
+                                    calculateTotalPrice(); // Recalculate the total price
                                     Toast.makeText(context, "Đã xóa sản phẩm khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(context, "Error"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -86,14 +92,12 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         }
 
         if (cartModelList.isEmpty()) {
-            Intent intent = new Intent("MyTotalAmount");
-            intent.putExtra("totalAmount", 0);
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-        } else {
-            Intent intent = new Intent("MyTotalAmount");
-            intent.putExtra("totalAmount", totalPrice);
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            totalPrice = 0; // Set totalPrice to 0 when the cart is empty
         }
+
+        Intent intent = new Intent("MyTotalAmount");
+        intent.putExtra("totalAmount", totalPrice);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
     }
     public class ViewHolder extends RecyclerView.ViewHolder {

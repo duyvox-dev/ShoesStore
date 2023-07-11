@@ -3,6 +3,7 @@ package com.example.myshoesstore;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class MyOrdersFragment extends Fragment {
     List<MyCartModel> cartModelList;
     User user;
     ProgressBar pb;
+    ConstraintLayout emptyLayout, nonEmptyLayout;
 
     public MyOrdersFragment() {
         // Required empty public constructor
@@ -50,8 +52,13 @@ public class MyOrdersFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_my_orders, container, false);
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        emptyLayout = root.findViewById(R.id.constraintOrder1);
+        nonEmptyLayout = root.findViewById(R.id.constraintOrder2);
+        nonEmptyLayout.setVisibility(View.GONE);
+
+
         rvOrder = root.findViewById(R.id.recyclerViewOrder);
-        rvOrder.setVisibility(View.GONE);
         pb = root.findViewById(R.id.progressBar);
         pb.setVisibility(View.VISIBLE);
         rvOrder.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -73,8 +80,18 @@ public class MyOrdersFragment extends Fragment {
 
 
                                 orderAdapter.notifyDataSetChanged();
-                                pb.setVisibility(View.GONE);
-                                rvOrder.setVisibility(View.VISIBLE);
+                                if (cartModelList.isEmpty()) {
+                                    // Show empty layout if the cart is empty
+                                    pb.setVisibility(View.GONE);
+                                    nonEmptyLayout.setVisibility(View.GONE);
+                                    emptyLayout.setVisibility(View.VISIBLE);
+                                } else {
+                                    // Show non-empty layout if the cart has items
+                                    pb.setVisibility(View.GONE);
+                                    nonEmptyLayout.setVisibility(View.VISIBLE);
+                                    emptyLayout.setVisibility(View.GONE);
+                                }
+
 
                             }
                         }
