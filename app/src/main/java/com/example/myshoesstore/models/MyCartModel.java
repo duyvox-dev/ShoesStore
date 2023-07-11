@@ -10,6 +10,7 @@ public class MyCartModel implements Serializable {
     String quantity;
     int totalPrice;
     String documentId;
+    String pId;
 
     public MyCartModel() {
     }
@@ -21,6 +22,14 @@ public class MyCartModel implements Serializable {
         this.currentTime = currentTime;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+    }
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public String getDocumentId() {

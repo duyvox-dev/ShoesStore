@@ -1,6 +1,8 @@
 package com.example.myshoesstore.models;
 
-public class PopularModel {
+import java.io.Serializable;
+
+public class PopularModel implements Serializable {
     String name;
     String description;
     String rating;
@@ -8,6 +10,7 @@ public class PopularModel {
     String type;
     String img_url;
 
+    String pId;
     public PopularModel() {
     }
 
@@ -18,6 +21,14 @@ public class PopularModel {
         this.discount = discount;
         this.type = type;
         this.img_url = img_url;
+    }
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public String getName() {

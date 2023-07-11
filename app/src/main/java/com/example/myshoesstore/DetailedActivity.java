@@ -118,7 +118,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("quantity", txtQuantity.getText().toString());
         cartMap.put("totalPrice", price);
-
+        cartMap.put("pId", productModel.getpId());
         firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
                 .collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

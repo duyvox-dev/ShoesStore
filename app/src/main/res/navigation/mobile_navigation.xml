@@ -42,4 +42,15 @@
         android:name="com.example.myshoesstore.MyCartFragment"
         android:label="@string/my_cart"
         tools:layout="@layout/fragment_my_cart" />
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.example.myshoesstore.NotificationFragment"
+        android:label="@string/my_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/nav_location"
+        android:name="com.example.myshoesstore.LocationFragment"
+        android:label="@string/my_location"
+        tools:layout="@layout/fragment_location" />
+
 </navigation>

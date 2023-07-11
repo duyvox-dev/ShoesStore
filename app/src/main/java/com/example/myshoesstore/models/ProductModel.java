@@ -11,6 +11,7 @@ public class ProductModel implements Serializable {
     String brandId;
     int price;
     int stock;
+    String pId;
 
     public ProductModel() {
     }
@@ -24,6 +25,14 @@ public class ProductModel implements Serializable {
         this.brandId = brandId;
         this.price = price;
         this.stock = stock;
+    }
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public String getName() {

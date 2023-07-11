@@ -51,6 +51,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         holder.txtQuantity.setText(cartModelList.get(position).getQuantity());
         holder.txtTotalPrice.setText(String.valueOf(cartModelList.get(position).getTotalPrice()));
 
+
         holder.imgRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
