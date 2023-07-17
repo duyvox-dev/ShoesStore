@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_back_arrow" />
+
+    <TextView
+        android:id="@+id/titlePayment"
+        android:layout_width="379dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/aldrich"
+        android:gravity="center"
+        android:text="Thông tin đơn hàng"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titlePayment"
+        android:text="Tên:"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/nameOder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewName"
+        android:textColor="#f33"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Name"
+        android:paddingLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameOder"
+        android:text="Số điện thoại:"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/phoneOder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewPhone"
+        android:textColor="#f33"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Name"
+        android:paddingLeft="50dp" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phoneOder"
+        android:text="Địa chỉ:"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/addressOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewAddress"
+        android:textColor="#f33"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Name"
+        android:paddingLeft="50dp"/>
+
+
+    <TextView
+        android:id="@+id/textViewQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressOrder"
+        android:text="Thành tiền:"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/moneyOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewQuantity"
+        android:textColor="#f33"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Name"
+        android:paddingLeft="50dp" />
+
+    <Button
+        android:id="@+id/btnPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/moneyOrder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="#f332"
+        android:text="Thanh toán"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+</RelativeLayout>

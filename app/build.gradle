@@ -51,5 +51,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    //zalopay
+    implementation fileTree(dir: '/Users/minhthanh/Documents/zalopay', include: ['*.aar', '*.jar'], exclude: [])
+
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
 
 }

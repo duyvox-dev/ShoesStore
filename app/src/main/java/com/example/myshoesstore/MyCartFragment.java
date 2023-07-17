@@ -13,13 +13,17 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myshoesstore.Api.CreateOrder;
 import com.example.myshoesstore.models.MyCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,11 +32,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import adapters.MyCartAdapter;
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 
 public class MyCartFragment extends Fragment {
@@ -44,6 +54,7 @@ public class MyCartFragment extends Fragment {
     List<MyCartModel> cartModelList;
     ProgressBar pb;
     Button btnOrder;
+    int totalBill;
     ConstraintLayout emptyLayout, nonEmptyLayout;
     public MyCartFragment() {
         // Required empty public constructor
@@ -110,17 +121,23 @@ public class MyCartFragment extends Fragment {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PlacedOrderActivity.class);
-                intent.putExtra("itemList", (Serializable) cartModelList);
+
+                Intent intent = new Intent(getContext(), PaymentActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("itemList", (Serializable) cartModelList);
+                bundle.putInt("totalAmount", totalBill);
+                intent.putExtra("BundlePackage",bundle);
                 startActivity(intent);
             }
         });
         return root;
     }
+
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int totalBill = intent.getIntExtra("totalAmount", 0);
+            totalBill = intent.getIntExtra("totalAmount", 0);
             txtTotalAmount.setText("Tổng cộng: " + totalBill + " đ");
 
             if (totalBill == 0) {
